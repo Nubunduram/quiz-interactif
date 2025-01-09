@@ -1,4 +1,3 @@
-````
 # Quiz Dynamique
 
 Un quiz interactif en HTML/CSS/JS permettant :
@@ -17,11 +16,9 @@ Un quiz interactif en HTML/CSS/JS permettant :
 ## Installation
 
 1. Cloner ce dépôt :
-```bash
-   git clone https://github.com/votre-nom/quiz-dynamique.git
-````
+`git clone https://github.com/votre-nom/quiz-dynamique.git`
 
-1. Ouvrir `index.html` dans un navigateur.
+2. Ouvrir `index.html` dans un navigateur.
 
 ## Utilisation
 
