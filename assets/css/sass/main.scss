@@ -42,7 +42,7 @@ button:hover {
 #intro-screen,
 #question-screen,
 #result-screen,
-#infinite {
+#question-screen2 {
   max-width: 70%;
   margin: 0 auto 20px;
   background: #e1c3e2;
@@ -51,7 +51,7 @@ button:hover {
   box-shadow: 0 1px 6px black;
 }
 
-#answers button {
+#answers,#answersINF button {
   display: block;
   width: 60%;
   margin: 8px auto;
