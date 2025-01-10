@@ -1,0 +1,19 @@
+header{
+	width:100vw;
+	height:80px;
+	background-color:#30142f;
+	color:pink;
+	display:flex;
+	justify-content:center;
+	div{
+		height:100%;
+		display:flex;
+		width:80%;
+		justify-content:space-between;
+		align-items:center;
+		svg{fill:pink;}
+		h1{font-size:30px}
+	}
+	margin-bottom:50px;
+	box-shadow:0px 2px 5px black;
+}
