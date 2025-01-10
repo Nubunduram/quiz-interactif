@@ -1,8 +1,62 @@
+@charset "UTF-8";
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+a {
+  all: unset;
+}
+
 body {
   font-family: "Segoe UI", Arial, sans-serif;
   margin: 20px;
   text-align: center;
-  background: #fafafa;
+  background: #323641;
   color: #333;
 }
 
@@ -20,15 +74,15 @@ button {
   margin: 10px auto;
   padding: 10px 20px;
   cursor: pointer;
-  background-color: #1976d2;
-  color: #fff;
+  background-color: #fcc5ff;
+  color: black;
   border: none;
   border-radius: 6px;
   transition: background-color 0.3s;
 }
 
 button:hover {
-  background-color: #1565c0;
+  background-color: #f538ff;
 }
 
 .hidden {
@@ -40,10 +94,10 @@ button:hover {
 #result-screen {
   max-width: 600px;
   margin: 0 auto 20px;
-  background: #fff;
+  background: #e1c3e2;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 8px rgb(118, 43, 208);
 }
 
 #answers button {
@@ -89,3 +143,5 @@ button:hover {
   font-size: 1.2em;
   margin-bottom: 10px;
 }
+
+/*# sourceMappingURL=style.css.map */
