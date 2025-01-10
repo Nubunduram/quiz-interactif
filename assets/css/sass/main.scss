@@ -2,16 +2,15 @@
 @import "header.scss";
 @import "footer.scss";
 
+*{box-sizing:content-box;}
 body {
   font-family: "Segoe UI", Arial, sans-serif;
   margin: 20px;
   text-align: center;
   background: #323641;
-  color: #333;
-}
-
-h1 {
-  margin-bottom: 25px;
+  color: black;
+  padding:0;
+  margin:0;
 }
 
 .notice {
@@ -32,7 +31,8 @@ button {
 }
 
 button:hover {
-  background-color: #f538ff;
+  background-color: #30142f;
+  color:pink;
 }
 
 .hidden {
@@ -41,13 +41,14 @@ button:hover {
 
 #intro-screen,
 #question-screen,
-#result-screen {
-  max-width: 600px;
+#result-screen,
+#infinite {
+  max-width: 70%;
   margin: 0 auto 20px;
   background: #e1c3e2;
-  padding: 20px;
+  padding: 30px;
   border-radius: 8px;
-  box-shadow: 0 3px 8px rgba(118, 43, 208, 1);
+  box-shadow: 0 1px 6px black;
 }
 
 #answers button {
