@@ -36,6 +36,7 @@ let currentQuestionIndex = 0;
 let score = 0;
 let bestScore = loadFromLocalStorage("bestScore", 0);
 let timerId = null;
+let playerAnswers = [];
 
 // DOM Elements
 const introScreen = getElement("#intro-screen");
@@ -106,6 +107,13 @@ function selectAnswer(index, btn) {
   clearInterval(timerId);
 
   const q = questions[currentQuestionIndex];
+  const playerAnswer = {
+    question: q.text,
+    chosenAnswer: q.answers[index],
+    correctAnswer: q.answers[q.correct],
+  };
+  playerAnswers.push(playerAnswer);
+
   if (index === q.correct) {
     score++;
     btn.classList.add("correct");
@@ -138,11 +146,27 @@ function endQuiz() {
     saveToLocalStorage("bestScore", bestScore);
   }
   setText(bestScoreEnd, bestScore);
+
+  const summaryTableBody = getElement("#summary-table tbody");
+  summaryTableBody.innerHTML = "";
+
+  playerAnswers.forEach((answer) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${answer.question}</td>
+      <td>${answer.chosenAnswer}</td>
+      <td>${answer.correctAnswer}</td>
+    `;
+    summaryTableBody.appendChild(row);
+  });
 }
+
 
 function restartQuiz() {
   hideElement(resultScreen);
   showElement(introScreen);
 
   setText(bestScoreValue, bestScore);
+  playerAnswers = [];
 }
+
