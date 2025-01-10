@@ -244,6 +244,10 @@ function selectInfiniteAnswer(index, btn, correctIndex) {
 // Select the element with the class "daynight"
 const dayNight = document.getElementById("daynight");
 
+function toggleSiteTheme() {
+  document.body.classList.toggle("dark-mode");
+  console.log("Site theme toggled!");
+}
 // Ensure the element exists before adding the event listener
 if (dayNight) {
   dayNight.addEventListener("click", function () {
@@ -261,6 +265,7 @@ if (dayNight) {
       // Check current path state and toggle
       const currentPath = svgPath.getAttribute("d");
       svgPath.setAttribute("d", currentPath === pathState1 ? pathState2 : pathState1);
+      toggleSiteTheme();
     }
   });
 }
