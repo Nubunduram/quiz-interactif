@@ -41,16 +41,21 @@ let playerAnswers = [];
 // DOM Elements
 const introScreen = getElement("#intro-screen");
 const questionScreen = getElement("#question-screen");
+const questionScreen2 = getElement("#question-screen2");
 const resultScreen = getElement("#result-screen");
 
 const bestScoreValue = getElement("#best-score-value");
 const bestScoreEnd = getElement("#best-score-end");
 
 const questionText = getElement("#question-text");
+const questionTextINF = getElement("#question-textINF");
 const answersDiv = getElement("#answers");
+const answersDivINF = getElement("#answersINF");
 const nextBtn = getElement("#next-btn");
 const startBtn = getElement("#start-btn");
 const restartBtn = getElement("#restart-btn");
+
+const nextBtnINF = getElement("#next-btnINF");
 
 const scoreText = getElement("#score-text");
 const timeLeftSpan = getElement("#time-left");
@@ -58,10 +63,14 @@ const timeLeftSpan = getElement("#time-left");
 const currentQuestionIndexSpan = getElement("#current-question-index");
 const totalQuestionsSpan = getElement("#total-questions");
 
+const infiniteBTN = getElement("#infiniteBTN");
+
 // Init
 startBtn.addEventListener("click", startQuiz);
 nextBtn.addEventListener("click", nextQuestion);
 restartBtn.addEventListener("click", restartQuiz);
+
+infiniteBTN.addEventListener("click", infiniteMode);
 
 setText(bestScoreValue, bestScore);
 
@@ -78,36 +87,36 @@ function startQuiz() {
   hideElement(introScreen);
   showElement(questionScreen);
 
-  currentQuestionIndex = 0;
-  score = 0;
+  currentQuestionIndex = 0; // resets the question index
+  score = 0; // resets the score
 
-  setText(totalQuestionsSpan, questions.length);
+  setText(totalQuestionsSpan, questions.length); // Sets the max questions to solve like Question index / MAX
 
   showQuestion();
 }
 
 function showQuestion() {
-  clearInterval(timerId);
+  clearInterval(timerId); // Clear the timer  
 
-  const q = questions[currentQuestionIndex];
-  setText(questionText, q.text);
-  setText(currentQuestionIndexSpan, currentQuestionIndex + 1);
+  const q = questions[currentQuestionIndex]; // getting the right question to show
+  setText(questionText, q.text); // prints the question on #question-text
+  setText(currentQuestionIndexSpan, currentQuestionIndex + 1); // prints the actual index on #current-question-index
 
-  answersDiv.innerHTML = "";
-  q.answers.forEach((answer, index) => {
-    const btn = createAnswerButton(answer, () => selectAnswer(index, btn));
-    answersDiv.appendChild(btn);
+  answersDiv.innerHTML = ""; // setting up #answers
+  q.answers.forEach((answer, index) => { 
+    const btn = createAnswerButton(answer, () => selectAnswer(index, btn)); // dom.js fn to create a nice btn html code
+    answersDiv.appendChild(btn); // appening the btn to the DOM in #answers 
   });
 
-  nextBtn.classList.add("hidden");
+  nextBtn.classList.add("hidden"); // hide the button so the user has to answer
 
-  timeLeftSpan.textContent = q.timeLimit;
+  timeLeftSpan.textContent = q.timeLimit; 
   timerId = startTimer(
     q.timeLimit,
-    (timeLeft) => setText(timeLeftSpan, timeLeft),
+    (timeLeft) => setText(timeLeftSpan, timeLeft), // replace the #time-left text with actual time
     () => {
-      lockAnswers(answersDiv);
-      nextBtn.classList.remove("hidden");
+      lockAnswers(answersDiv); // cannot answer after no timeleft 
+      nextBtn.classList.remove("hidden"); // shows the next btn when time is over
     }
   );
 }
@@ -123,7 +132,7 @@ function selectAnswer(index, btn) {
   };
   playerAnswers.push(playerAnswer);
 
-  if (index === q.correct) {
+  if (index === q.correct) { // checking if the btn clicked got the correct flag
     score++;
     btn.classList.add("correct");
   } else {
@@ -135,7 +144,8 @@ function selectAnswer(index, btn) {
   nextBtn.classList.remove("hidden");
 }
 
-function nextQuestion() {
+function nextQuestion() { // next index question, if index == lenght : no questions left
+
   currentQuestionIndex++;
   if (currentQuestionIndex < questions.length) {
     showQuestion();
@@ -144,7 +154,7 @@ function nextQuestion() {
   }
 }
 
-function endQuiz() {
+function endQuiz() { // score set
   hideElement(questionScreen);
   showElement(resultScreen);
 
@@ -179,3 +189,53 @@ function restartQuiz() {
   playerAnswers = [];
 }
 
+function infiniteMode() {
+  showElement(questionScreen2); // Assume this is a separate screen for infinite mode
+
+  currentQuestionIndex = 0; // Reset the index (not really needed for infinite, but for tracking)
+  score = 0; // Reset the score for infinite mode (optional)
+
+  showInfiniteQuestion();
+}
+
+function showInfiniteQuestion() { // Same as showQuestion() but with random and separated card display
+  clearInterval(timerId);
+
+  const randomQuestion = questions[Math.floor(Math.random() * questions.length)];
+  setText(questionTextINF, randomQuestion.text);
+
+  answersDivINF.innerHTML = "";
+  randomQuestion.answers.forEach((answer, index) => {
+    const btn = createAnswerButton(answer, () => selectInfiniteAnswer(index, btn, randomQuestion.correct));
+    answersDivINF.appendChild(btn);
+  });
+
+  nextBtnINF.classList.add("hidden"); // Hide the next button until answered
+
+  timeLeftSpan.textContent = randomQuestion.timeLimit;
+  timerId = startTimer(
+    randomQuestion.timeLimit,
+    (timeLeft) => setText(timeLeftSpan, timeLeft),
+    () => {
+      lockAnswers(answersDivINF);
+      nextBtnINF.classList.remove("hidden");
+    }
+  );
+
+  nextBtnINF.addEventListener("click", showInfiniteQuestion); // Re-show a random question on click
+}
+
+function selectInfiniteAnswer(index, btn, correctIndex) {
+  clearInterval(timerId);
+
+  if (index === correctIndex) { // checks answer validity
+    score++;
+    btn.classList.add("correct");
+  } else {
+    btn.classList.add("wrong");
+  }
+
+  markCorrectAnswer(answersDivINF, correctIndex);
+  lockAnswers(answersDivINF); // locks answer
+  nextBtnINF.classList.remove("hidden"); // next button comes back
+}
