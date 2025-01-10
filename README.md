@@ -43,3 +43,4 @@ Un quiz interactif en HTML/CSS/JS permettant :
 ## Auteurs
 
 Ce projet sert d’exemple pédagogique pour comprendre la structure d’une application web simple, sa documentation et son organisation agile (backlog, user stories) et Gitflow.
+truc
