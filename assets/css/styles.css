@@ -97,6 +97,7 @@ body {
 }
 
 button {
+  min-width: 100px;
   margin: 10px auto;
   padding: 10px 20px;
   cursor: pointer;
@@ -129,10 +130,10 @@ button:hover {
 }
 
 #answers, #answersINF button {
-  display: block;
+  display: flex;
+  flex-direction: column;
   width: 60%;
   margin: 8px auto;
-  background-color: #f5f5f5;
   color: #333;
   border-radius: 4px;
   transition: background-color 0.3s;
@@ -172,4 +173,22 @@ button:hover {
   margin-bottom: 10px;
 }
 
-/*# sourceMappingURL=style.css.map */
+.dark-mode {
+  background-color: #e1c3e2;
+}
+
+#summary-table-container {
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+}
+#summary-table-container table thead tr th {
+  border: #30142f 2px solid;
+  padding: 5px;
+}
+#summary-table-container table tbody tr td {
+  border: #30142f 2px solid;
+  padding: 5px;
+}
+
+/*# sourceMappingURL=styles.css.map */
